@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Брендбук - Золотой початок</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+<!--
+    <header>
+        <div class="container">
+            <h1 class="brand-title">Spotify</h1>
+            <p class="brand-subtitle">Брендбук и руководство по использованию айдентики</p>
+        </div>
+    </header>
+-->
+
+    <div class="container">
+        <!-- Секция с логотипом -->
+        <section class="logo-section">
+            <h2 class="section-title">Логотип</h2>
+            <div class="logo-preview">
+                <img src="data/pjkjnjq_gjxfnjr/logo.svg" alt="Spotify Logo" id="logoImage">
+            </div>
+            <div class="download-buttons">
+                <a class="btn" href="data/pjkjnjq_gjxfnjr/cd.cdr" download>Скачать Corel Draw макет</a>
+<!--                <button class="btn" onclick="downloadLogo('png')">Скачать Corel Draw макет</button>-->
+<!--                <button class="btn" onclick="downloadLogo('svg')">Скачать SVG</button>-->
+                <a class="btn" href="#">Статус: Одобрен</a>
+                <button class="btn btn-outline" onclick="showUsageRules()">Правила использования</button>
+            </div>
+        </section>
+
+        <!-- Секция с цветами -->
+        <section class="colors-section">
+            <h2 class="section-title">Цветовая палитра</h2>
+            <div class="color-palette">
+                <div class="color-item">
+                    <div class="color-box" style="background-color: #F2B53B;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Жёлтый DTF</div>
+                        <div>CMYK: 5, 32, 86, 0</div>
+                        <div>HEX: #F2B53B</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-box" style="background-color: #0A4F13"></div>
+                    <div class="color-info">
+                        <div class="color-name">Зелёный DTF</div>
+                        <div>CMYK: 80, 26, 94, 67</div>
+                        <div>HEX: #0A4F13</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция с примерами использования -->
+<!--
+        <section class="usage-section">
+            <h2 class="section-title">Примеры использования</h2>
+            <div class="usage-examples">
+                <div class="usage-item">
+                    <img src="https://via.placeholder.com/200x100/1DB954/FFFFFF?text=App+Screen" alt="Пример в приложении">
+                    <p>Использование в мобильном приложении</p>
+                </div>
+                <div class="usage-item">
+                    <img src="https://via.placeholder.com/200x100/191414/1DB954?text=Website" alt="Пример на сайте">
+                    <p>Применение на официальном сайте</p>
+                </div>
+                <div class="usage-item">
+                    <img src="https://via.placeholder.com/200x100/FFFFFF/191414?text=Merch" alt="Пример мерча">
+                    <p>Брендированная продукция</p>
+                </div>
+            </div>
+        </section>
+-->
+    </div>
+
+    <!-- Модальное окно с правилами -->
+    <div id="usageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Правила использования логотипа</h3>
+            <ul style="text-align: left; margin-top: 20px;">
+                <li>Печатать только на DTF-60sm</li>
+                <li>Всегда чистить головы перед печатью</li>
+                <li>Не изменяйте цвета логотипа</li>
+                <li>Отступ вокруг логотипа не менее 8 мм</li>
+            </ul>
+            <button class="btn" onclick="closeModal()" style="margin-top: 20px;">Понятно</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 Брендбук "Золотой початок". Все права принадлежат "Remark".</p>
+            <p>Данная страница создана в образовательных целях.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Функции для работы с модальным окном
+        function showUsageRules() {
+            document.getElementById('usageModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('usageModal').style.display = 'none';
+        }
+
+        // Закрытие модального окна при клике вне его
+        window.onclick = function(event) {
+            const modal = document.getElementById('usageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Функция "скачивания" логотипа (в демо-режиме)
+        function downloadLogo(format) {
+            alert(`В реальном приложении здесь бы началось скачивание логотипа в формате ${format.toUpperCase()}\n\nДля демонстрации вы можете:\n1. Правой кнопкой по логотипу → "Сохранить изображение как"\n2. Использовать готовые файлы из официального брендбука`);
+            
+            // В реальном приложении здесь был бы код для скачивания:
+            // const link = document.createElement('a');
+            // link.href = `path/to/logo.${format}`;
+            // link.download = `spotify-logo.${format}`;
+            // link.click();
+        }
+
+        // Дополнительный функционал: копирование цветовых кодов
+        document.querySelectorAll('.color-box').forEach(box => {
+            box.addEventListener('click', function() {
+                const colorCode = this.style.backgroundColor;
+                const rgbToHex = (rgb) => {
+                    const values = rgb.match(/\d+/g);
+                    return '#' + values.map(x => {
+                        const hex = parseInt(x).toString(16);
+                        return hex.length === 1 ? '0' + hex : hex;
+                    }).join('');
+                };
+                
+                const hexCode = rgbToHex(colorCode);
+                navigator.clipboard.writeText(hexCode).then(() => {
+                    alert(`Цвет ${hexCode} скопирован в буфер обмена!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
